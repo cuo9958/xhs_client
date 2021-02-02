@@ -16,6 +16,8 @@ interface iState {
   urls: string[];
   btnState: number;
   result: any[];
+  isShow: boolean;
+  ruleTxt: string;
 }
 
 interface iRule {
@@ -81,6 +83,8 @@ export default class extends React.Component<any, iState> {
       urls: [],
       btnState: 0,
       result: [],
+      isShow: false,
+      ruleTxt: '',
     };
   }
 
@@ -93,7 +97,9 @@ export default class extends React.Component<any, iState> {
             num={this.state.timestamp}
             onChange={(e) => this.onTimeChange(e)}
           />
-          <button className="btn">设置规则</button>
+          <button onClick={() => this.openRule()} className="btn">
+            设置规则
+          </button>
           <button className="btn" onClick={() => this.start()}>
             {this.state.btnState === 0 ? '开始' : '暂停'}
           </button>
@@ -110,10 +116,41 @@ export default class extends React.Component<any, iState> {
           </div>
           <DataList rules={rules} list={this.state.result} />
         </div>
+        {this.state.isShow && (
+          <div className="modal">
+            <textarea
+              className="modal_txt"
+              onChange={(e) => this.onRuleChange(e)}
+            ></textarea>
+            <button onClick={() => this.sureRule()} className="modal_btn">
+              确定
+            </button>
+          </div>
+        )}
       </div>
     );
   }
-
+  openRule() {
+    this.setState({
+      ruleTxt: JSON.stringify(rules),
+      isShow: true,
+    });
+  }
+  onRuleChange(e: any) {
+    this.setState({
+      ruleTxt: e.target.value,
+    });
+  }
+  sureRule() {
+    try {
+      const data = JSON.parse(this.state.ruleTxt);
+      rules = data;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isShow: false });
+    }
+  }
   onTxtSelect(txts: string) {
     const list = txts.split(/[(\r\n)\r\n]+/);
     this.setState({

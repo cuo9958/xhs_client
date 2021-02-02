@@ -5,12 +5,12 @@ import installExtension, {
   REACT_DEVELOPER_TOOLS,
   REDUX_DEVTOOLS,
 } from 'electron-devtools-installer';
-import fs from 'fs';
+// import fs from 'fs';
 import XLSX from 'xlsx';
 
 let mainWindow: Electron.BrowserWindow | null;
 
-require('electron-debug')();
+// require('electron-debug')();
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -19,7 +19,7 @@ function createWindow() {
     backgroundColor: '#fff',
     webPreferences: {
       nodeIntegration: true,
-      devTools: true,
+      //   devTools: true,
       webSecurity: false,
     },
   });
