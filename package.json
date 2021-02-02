@@ -15,10 +15,11 @@
     "build:react": "webpack --config webpack/react.webpack.js",
     "package": "npm-run-all build package:dist",
     "package:dist": "electron-builder --dir",
+    "package:w": "electron-builder --dir --win",
     "test": "jest"
   },
   "keywords": [],
-  "author": "Diego Fernandes <diego.schell.f@gmail.com>",
+  "author": "疯狂紫萧",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -67,11 +68,15 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.5",
+    "electron-debug": "^3.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "xlsx": "^0.16.9"
   },
   "build": {
-    "appId": "your.id",
+    "appId": "com.guofangchao.xhs",
     "mac": {
       "category": "public.app-category.video"
     },
